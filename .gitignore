@@ -1,0 +1,15 @@
+# Python standard ignores
+__pycache__/
+*.py[cod]
+
+# Virtual Environment
+venv/
+
+# Environment variables (Secrets)
+.env
+
+# System files
+.DS_Store
+
+# Local Storage (Ignored folders)
+temp_storage/
