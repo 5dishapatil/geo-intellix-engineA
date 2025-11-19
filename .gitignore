@@ -1,15 +1,22 @@
-# Python standard ignores
+# --- IGNORE HEAVY AI MODELS ---
+*.bin
+*.safetensors
+*.pth
+*.pt
+*.h5
+
+# Specific Model Folders
+language_engine/GeoChat/geochat-7B/
+language_engine/GeoChat/geochat-vit-l/
+
+# --- PYTHON JUNK ---
 __pycache__/
-*.py[cod]
-
-# Virtual Environment
-venv/
-
-# Environment variables (Secrets)
+*.pyc
 .env
+.venv
+venv/
+*.log
 
-# System files
+# --- DOCKER & SYSTEM ---
+.wslconfig
 .DS_Store
-
-# Local Storage (Ignored folders)
-temp_storage/

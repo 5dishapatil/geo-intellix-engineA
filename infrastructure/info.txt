@@ -1,0 +1,2 @@
+later move the Dockerfile here 
+  then in another file install_memory_fix.ps1
