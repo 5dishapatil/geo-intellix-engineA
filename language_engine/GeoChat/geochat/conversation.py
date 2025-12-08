@@ -199,7 +199,45 @@ class Conversation:
             else:
                 ret[-1][-1] = msg
         return ret
+    # ... existing to_gradio_chatbot function ...
 
+    def to_streamlit_history(self):
+        """
+        Converts conversation history to Streamlit format:
+        [{'role': 'user', 'content': '...'}, {'role': 'assistant', 'content': '...'}]
+        """
+        ret = []
+        for i, (role, msg) in enumerate(self.messages[self.offset:]):
+            # 1. Map internal roles to Streamlit standard ('user' or 'assistant')
+            if role.upper() in ['HUMAN', 'USER']:
+                st_role = 'user'
+            else:
+                st_role = 'assistant'
+
+            # 2. Handle Image Messages (Stored as tuples in this codebase)
+            if isinstance(msg, tuple):
+                # msg structure is usually: (text_content, image_obj, crop_mode)
+                text_content, image_obj, _ = msg
+                
+                # Remove the <image> token tags for cleaner display
+                clean_text = text_content.replace('<image>', '').replace('\n', ' ').strip()
+                
+                # Append with an 'image' key that Streamlit can check for
+                ret.append({
+                    "role": st_role,
+                    "content": clean_text,
+                    "image": image_obj  # Pass the PIL Image object directly
+                })
+            else:
+                # 3. Handle Text Messages
+                # Clean up any None values or weird tokens
+                content = msg if msg is not None else ""
+                ret.append({
+                    "role": st_role,
+                    "content": content
+                })
+        return ret
+    
     def copy(self):
         return Conversation(
             system=self.system,

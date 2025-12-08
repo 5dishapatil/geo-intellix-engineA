@@ -80,6 +80,16 @@ docker build -t geochat-prod .
 4️⃣ Step 4: Run the Inference Server
 This command launches the secure container, mounts your local weights, and starts the web interface.
 
+for entering the linux environment
+docker run --gpus all `
+    -p 7860:7860 `
+    -v ${PWD}/geochat-7B:/app/GeoChat/geochat-7B `
+    --rm -it `
+    geochat-v2 /bin/bash
+
+
+pip install "numpy<2.0" --force-reinstall
+
 For Windows (PowerShell):
 docker run --gpus all `
   -p 7860:7860 `
@@ -97,6 +107,8 @@ docker run --gpus all `
   geochat-prod
 
   Note on Low VRAM (RTX 3050/4050): The Dockerfile is configured to automatically load the model in 4-bit mode to fit on 6GB GPUs. If you have A100s, you can edit the CMD in the Dockerfile to remove --load-4bit.
+
+python geochat_demo.py --model-path geochat-7B --load-4bit //to run it
 
 5️⃣ Usage
 Wait for the terminal to show: Running on local URL: http://0.0.0.0:7860 (The first load may take 1-2 minutes as it moves data to Swap memory).

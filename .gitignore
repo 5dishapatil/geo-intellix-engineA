@@ -8,6 +8,7 @@
 # Specific Model Folders
 language_engine/GeoChat/geochat-7B/
 language_engine/GeoChat/geochat-vit-l/
+language_engine/GeoChat/clip-encoder/
 
 # --- PYTHON JUNK ---
 __pycache__/

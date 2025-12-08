@@ -39,4 +39,6 @@ RUN pip install .
 # STEP 5: Runtime
 ENV LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/usr/local/cuda/lib64/
 
+# STEP 6: Install Streamlit
+RUN pip install streamlit
 CMD ["python", "geochat_demo.py", "--model-path", "geochat-7B", "--load-4bit"]
